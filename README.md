@@ -12,7 +12,7 @@ This project is a fully functional habit tracking web application built using Dj
 ## Technical Details  
 - **Framework**: Django (Python)  
 - **Database**: Integrated with a relational database to store and manage user and application data.  
-- **Frontend**: HTML, CSS, and JavaScript for an interactive and responsive user interface.  
+- **Frontend**: HTML and CSS for an interactive and responsive user interface.  
 - **Backend**: Django views and models for processing business logic and handling data interactions.  
 - **Security**: Secure password handling, session management, and access restrictions to protect user data.  
 - **Deployment-Ready**: Designed with modularity and scalability in mind, making it suitable for deployment in production environments.  
