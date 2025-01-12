@@ -1,0 +1,17 @@
+{% extends "polls/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h1>HabitWave</h1>
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+<!-- Register Button -->
+<div class="login-link">
+    <a href="{% url 'register' %}" class="button">Don't have an account?</a>
+</div>
+{% endblock %}

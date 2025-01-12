@@ -1,0 +1,39 @@
+{% extends "polls/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Welcome Message -->
+    <header class="welcome-header">
+        <h2>Welcome, {{ user.username }}!</h2>
+        <p>Great to see you here! Let’s keep building those positive habits.</p>
+    </header>
+
+    <!-- Habit Overview -->
+    <section class="habit-overview">
+        <h3>Your Habits</h3>
+        <ul>
+            {% for habit in habits %}
+            <li>
+                {{ habit.name }} ({{ habit.frequency }})
+                <a href="{% url 'habit_progress' habit.id %}">View Progress</a>
+            </li>
+            {% empty %}
+            <li>You have no habits yet. <a href="{% url 'create_habit' %}">Create one!</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!-- Add Habit Button -->
+    <div class="add-habit-button">
+        <a href="{% url 'create_habit' %}" class="button">Add a New Habit</a>
+    </div>
+
+    <!-- Coming Soon Section -->
+    <section class="coming-soon">
+        <h3>Coming Soon</h3>
+        <p>Stay tuned! A progress chart visualization feature will be available soon to track your journey better.</p>
+    </section>
+</div>
+{% endblock %}

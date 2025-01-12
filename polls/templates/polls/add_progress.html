@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Add Progress for "{{ habit.name }}"</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Save Progress</button>
+</form>
+
+<a href="{% url 'habit_progress' habit.id %}" class="button">Back to Progress</a>
+{% endblock %}

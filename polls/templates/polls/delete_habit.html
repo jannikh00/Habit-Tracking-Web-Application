@@ -1,0 +1,12 @@
+{% extends "polls/base.html" %}
+
+{% block title %}Delete Habit{% endblock %}
+
+{% block content %}
+<h2>Are you sure you want to delete "{{ habit.name }}"?</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+</form>
+<a href="{% url 'habit_list' %}" class="button">No, Go Back</a>
+{% endblock %}

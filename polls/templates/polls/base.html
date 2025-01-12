@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}HabitWave{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'polls/styles.css' %}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="{% url 'landing_page' %}">Home</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'create_habit' %}">Create Habit</a>
+        <a href="{% url 'habit_list' %}">Habit List</a>
+        <form action="{% url 'logout' %}" method="post" class="logout-form">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% block content %}
+        <!-- Individual page content will go here -->
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 HabitWave. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="{% url 'landing_page' %}">Home</a></li>
+            <li><a href="#">About (coming soon)</a></li>
+            <li><a href="#">Contact (coming soon)</a></li>
+        </ul>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{% extends "polls/base.html" %}
+
+{% block title %}Create Habit{% endblock %}
+
+{% block content %}
+<h2>Create a New Habit</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Habit</button>
+</form>
+<div>
+    <a href="{% url 'habit_list' %}" class="button">Habit List</a>
+    <a href="{% url 'dashboard' %}" class="button">Dashboard</a>
+</div>
+{% endblock %}

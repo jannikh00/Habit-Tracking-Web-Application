@@ -1,0 +1,23 @@
+{% extends "polls/base.html" %}
+
+{% block title %}Your Habits{% endblock %}
+
+{% block content %}
+<h2>Your Habits</h2>
+<ul>
+    {% for habit in habits %}
+    <li>
+        {{ habit.name }}: {{ habit.description }} ({{ habit.frequency }})
+        <a href="{% url 'habit_progress' habit.id %}">View Progress</a>
+        <a href="{% url 'update_habit' habit.id %}"> | Edit | </a>
+        <a href="{% url 'delete_habit' habit.id %}">Delete</a>
+    </li>
+    {% empty %}
+    <li>You have no habits yet. Create one!</li>
+    {% endfor %}
+</ul>
+<!-- Add Habit Button -->
+<div class="add-habit-button">
+    <a href="{% url 'create_habit' %}" class="button">Add a New Habit</a>
+</div>
+{% endblock %}

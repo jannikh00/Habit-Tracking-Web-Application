@@ -1,0 +1,33 @@
+{% extends "polls/base.html" %}
+{% load static %}
+
+{% block title %}HabitWave - Build Better Habits{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Full-width image -->
+    <div class="hero-image">
+        <img src="{% static 'polls/images/hero_good-habits.jpg' %}" alt="Person climbing in sunrise">
+    </div>
+
+    <header>
+        <h1>Welcome to HabitWave</h1>
+        <p>Transform your daily routines into habits that stick.</p>
+    </header>
+    <main>
+        <!-- Features and Benefits Section -->
+        <section class="features">
+            <h2>Why Choose HabitWave?</h2>
+            <p>HabitWave helps you take control of your habits, stay consistent, and achieve your goals.</p>
+            <p>With features like habit tracking, visual progress reports, and personalized insights, we make
+                self-improvement easy and fun!</p>
+        </section>
+
+        <!-- Call-to-Action Buttons -->
+        <div class="buttons">
+            <a href="{% url 'register' %}" class="button">Register</a>
+            <a href="{% url 'login' %}" class="button">Log In</a>
+        </div>
+    </main>
+</div>
+{% endblock %}

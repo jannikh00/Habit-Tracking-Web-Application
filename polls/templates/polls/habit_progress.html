@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Progress for "{{ habit.name }}"</h2>
+<p>{{ habit.description }}</p>
+
+<!-- Add the Chart.js script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Display Progress Table -->
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in progress %}
+        <tr>
+            <td>{{ entry.date }}</td>
+            <td>{{ entry.status|yesno:"Completed,Missed" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No progress recorded yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Chart for Progress Visualization -->
+<canvas id="progressChart" width="400" height="200"></canvas>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        const progressData = {
+            labels: [
+                {% for entry in progress %}
+        "{{ entry.date }}",
+            {% endfor %}
+        ],
+        datasets: [{
+            label: 'Progress',
+            data: [
+                {% for entry in progress %}
+                {% templatetag openbrace %} entry.status | yesno: "1,0" {% templatetag closebrace %}
+        {% endfor %}
+    ],
+        backgroundColor: 'rgba(10, 75, 51, 0.5)',
+        borderColor: 'rgba(10, 75, 51, 1)',
+        borderWidth: 1
+        }]
+    };
+
+    if (progressData.labels.length > 0) {
+        new Chart(ctx, {
+            type: 'bar',
+            data: progressData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    } else {
+        document.getElementById('progressChart').style.display = 'none';
+    }
+});
+</script>
+
+<!-- Action Buttons -->
+<a href="{% url 'add_progress' habit.id %}" class="button">Add Progress</a>
+<a href="{% url 'habit_list' %}" class="button">Back to Habit List</a>
+{% endblock %}
